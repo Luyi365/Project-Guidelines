@@ -13,7 +13,7 @@
     extern int user_id;        //: 全局
     int *user_id, **user_id;   //: 指针
     extern int *user_id;       //: 全局指针
-    struct UserInfo_t user_info;  //: 结构体变量
+    struct UserInfo user_info; //: 结构体变量
     ```
 
 ### 结构体
