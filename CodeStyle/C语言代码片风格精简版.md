@@ -21,7 +21,8 @@
 - 整体遵循帕斯卡命名法；
 - 语法结构采用「名词/形容词 + 名词」的结构，如`UserInfo`；
 - 使用`typedef`定义的新类型后缀加`_t`；
-- 枚举类型成员前缀加`结构体名_`，后面遵循全大写下划线命名法，如`UserInfo_BASE_ID`；
+- 枚举类型成员前缀加`结构体名_`，如`UserInfo_BaseID`；
+- 如果遇到知名缩写词，其大写更能反映单词整体性，则使用全大写的形式，如使用`ID`而非`Id`；
 - 下面是对不同结构体类型的命名示例：
     ```c
     typedef struct UserInfo {
@@ -29,7 +30,7 @@
     typedef union UserInfo {       //: 联合体
     } UserInfo_t;   
     typedef enum UserInfo {        //: 枚举
-        UserInfo_BASE_ID,
+        UserInfo_BaseID,
     } UserInfo_t;  
     ```
 
