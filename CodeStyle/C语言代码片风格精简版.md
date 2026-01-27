@@ -7,11 +7,11 @@
 - 语法结构采用「名词/形容词 + 名词」的结构，如`user_id`；
 - 下面是对不同变量类型的命名示例：
     ```c
-    int user_id;   
-    static int user_id;        //: 静态
-    const int user_id;         //: 常量
-    extern int user_id;        //: 全局
-    int *user_id, **user_id;   //: 指针
+    int user_id;               //: 变量
+    static int user_id;        //: 静态变量
+    const int user_id;         //: 常数变量
+    extern int user_id;        //: 全局变量
+    int *user_id, **user_id;   //: 指针变量
     extern int *user_id;       //: 全局指针
     struct UserInfo user_info; //: 结构体变量
     ```
@@ -25,11 +25,11 @@
 - 如果遇到知名缩写词，其大写更能反映单词整体性，则使用全大写的形式，如使用`ID`而非`Id`；
 - 下面是对不同结构体类型的命名示例：
     ```c
-    typedef struct UserInfo {
+    typedef struct UserInfo {      //: 结构体
     } UserInfo_t, *UserInfo_t, **UserInfo_t;    // 尽量避免在结构体类型声明时声明指针类型
     typedef union UserInfo {       //: 联合体
     } UserInfo_t;   
-    typedef enum UserInfo {        //: 枚举
+    typedef enum UserInfo {        //: 枚举体
         UserInfo_BaseID,
     } UserInfo_t;  
     ```
@@ -40,7 +40,7 @@
 - 语法结构采用「标识 + 动词 + 名词 + （子名词）」的结构，如`id_do_thing_sub()`；
 - 下面是对不同函数类型的命名示例：
     ```c
-    void id_do_thing_sub()         
+    void id_do_thing_sub(x, y)      //: 函数
     {
     }
     static void id_do_thing_sub()   //: 静态函数
@@ -64,7 +64,7 @@
 - 语法结构与变量、函数保持一致，只是把小写改成了大写，如`USER_ID`；
 - 下面是对不同宏类型的命名示例：
     ```c
-    #define USER_ID                 //: 变量宏
+    #define USER_ID(X)              //: 变量宏
     #define USER_INFO         \     //: 结构体定义宏
         UserInfo_t name = {   \
             ...;              \
