@@ -1,0 +1,20 @@
+---
+# 仅映射 c-style.md 中 clang-format 可以确定执行的格式规则。
+BasedOnStyle: LLVM
+Language: Cpp
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+PointerAlignment: Right
+SpaceBeforeParens: Never
+IndentCaseLabels: true
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  AfterControlStatement: false
+  BeforeElse: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+ReflowComments: false
+SortIncludes: Never

@@ -22,4 +22,4 @@
 
 | 语言 | 类型 | 爬取链接 | 国内镜像 |
 | :-----: | :------: | :-----: | :-----: |
-| C | 代码规范 | [C语言代码片风格精简版](https://raw.githubusercontent.com/Luyi365/Project-Guidelines/refs/heads/main/skills/c-code-review/references/c-style.md) | [链接](https://gitee.com/Luyi365/Project-Guidelines/raw/main/skills/c-code-review/references/c-style.md) |
+| C | 代码规范 | [C语言代码风格精简版](https://raw.githubusercontent.com/Luyi365/Project-Guidelines/refs/heads/main/skills/c-code-review/references/c-style.md) | [链接](https://gitee.com/Luyi365/Project-Guidelines/raw/main/skills/c-code-review/references/c-style.md) |
