@@ -1,0 +1,3 @@
+[submodule "skills/c-code-review"]
+	path = skills/c-code-review
+	url = git@github.com:Luyi365/c-code-review.git
