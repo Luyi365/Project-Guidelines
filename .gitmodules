@@ -1,3 +1,6 @@
 [submodule "skills/c-code-review"]
 	path = skills/c-code-review
 	url = ../c-code-review.git
+[submodule "rules/code-comment"]
+	path = rules/code-comment
+	url = ../code-comment.git
