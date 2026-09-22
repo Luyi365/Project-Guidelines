@@ -4,3 +4,6 @@
 [submodule "rules/code-comment"]
 	path = rules/code-comment
 	url = ../code-comment.git
+[submodule "prompts"]
+	path = prompts
+	url = ../prompts.git
