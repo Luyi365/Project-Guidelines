@@ -7,3 +7,9 @@
 [submodule "prompts"]
 	path = prompts
 	url = ../prompts.git
+[submodule "skills/editorconfig-doctor"]
+	path = skills/editorconfig-doctor
+	url = ../editorconfig-doctor.git
+[submodule "skills/git-doctor"]
+	path = skills/git-doctor
+	url = ../git-doctor.git
