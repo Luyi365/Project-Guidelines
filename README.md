@@ -10,8 +10,9 @@
 
 | 目录 | 内容形态 | 说明 |
 | :-----: | :------ | :------ |
-| `skills/` | [Agent Skill](https://agentskills.io/) | 可被 AI 工具主动调用的能力包，含触发描述、审查流程与参考资料 |
-| `prompts/` | 按需提示词 | 需用户主动调用的单次任务提示词（斜杠命令），执行完即结束。目前为预留目录，暂无内容 |
+| `skills/` | [Agent Skill](https://agentskills.io/) | 可被 AI 工具主动调用的能力包，含触发描述、审查流程与参考资料。每个 Skill 一个独立仓库 |
+| `rules/` | 常驻规则 | Agent 工作时默认持续生效的规则，用于约束代码风格、开发流程和行为边界。单仓库多文件，每个 `.md` 对应一类规则 |
+| `prompts/` | 按需提示词 | 需用户主动调用的单次任务提示词（斜杠命令），执行完即结束。单仓库多文件，目前暂无内容 |
 
 ## 导航
 
@@ -22,6 +23,16 @@
 | c-code-review | C 代码风格审查 | [Luyi365/c-code-review](https://github.com/Luyi365/c-code-review) | [Gitee](https://gitee.com/Luyi365/c-code-review) | [`skills/c-code-review/`](skills/c-code-review/) |
 | git-doctor | Git 配置诊断与修正 | [Luyi365/git-doctor](https://github.com/Luyi365/git-doctor) | [Gitee](https://gitee.com/Luyi365/git-doctor) | [`skills/git-doctor/`](skills/git-doctor/) |
 | editorconfig-doctor | EditorConfig 配置诊断与修正 | [Luyi365/editorconfig-doctor](https://github.com/Luyi365/editorconfig-doctor) | [Gitee](https://gitee.com/Luyi365/editorconfig-doctor) | [`skills/editorconfig-doctor/`](skills/editorconfig-doctor/) |
+
+### Rules（`rules/`）
+
+常驻规则集中在一个仓库内，每个 `.md` 文件对应一类规则：[Luyi365/rules](https://github.com/Luyi365/rules) ｜ [Gitee 镜像](https://gitee.com/Luyi365/rules) ｜ 本地路径 [`rules/`](rules/)
+
+| Rule | 说明 |
+| :-----: | :------ |
+| [code-comment.md](rules/code-comment.md) | 通用代码注释规则。约束注释的内容取舍、添加与省略边界、表达格式，不规定具体语言的注释语法 |
+
+规则是被动生效的：放进项目后 Agent 在相关工作中应持续遵循，无需调用。这与 `prompts/` 不同，后者要用户主动触发。
 
 ### Prompts（`prompts/`）
 
@@ -36,14 +47,15 @@
 - `c-code-review`负责 C 风格合规，`c-style.md`是唯一评分基准；`.clang-format`只处理可机械化部分，冲突时以规范正文为准。
 - `git-doctor`负责 Git 子模块与仓库行尾，`.gitattributes`决定版本库实际保存的行尾。
 - `editorconfig-doctor`负责编辑器通用行为；项目存在`.gitattributes`或格式化工具配置时与其对齐，不存在时仍可独立建立基线。
+- `rules/code-comment.md`负责注释的内容质量，不改变任何语言专属规范的注释语法与评分标准。
 
-发生交叉冲突时，统一按「项目自身强制规范与 CI → 语义性要求 → 专用工具配置 → 通用基线」处理。换言之：`c-style.md`高于`.clang-format`，`.gitattributes`的行尾规则高于`.editorconfig`，项目自己的明确约定高于各 Skill 的默认值。
+发生交叉冲突时，统一按「项目自身强制规范与 CI → 语义性要求 → 专用工具配置 → 通用基线」处理。换言之：`c-style.md`高于`.clang-format`，`.gitattributes`的行尾规则高于`.editorconfig`，项目自己的明确约定高于各 Skill 与规则的默认值。
 
 ## 获取仓库
 
 本仓库地址：[GitHub](https://github.com/Luyi365/Project-Guidelines) ｜ [Gitee 镜像](https://gitee.com/Luyi365/Project-Guidelines)
 
-由于 `skills/` 与 `prompts/` 的内容均以 submodule 形式引入，克隆时需要一并拉取子模块：
+由于 `skills/`、`rules/` 与 `prompts/` 的内容均以 submodule 形式引入，克隆时需要一并拉取子模块：
 
 ```bash
 # GitHub
@@ -96,6 +108,14 @@ git clone https://gitee.com/Luyi365/<仓库名>.git     # Gitee 镜像
 - **附带资源**：[`.editorconfig`](https://github.com/Luyi365/editorconfig-doctor/blob/main/assets/.editorconfig) 基线配置，可裁剪后放到目标项目根目录
 - **输出**：已修正 / 需人工处理 / 通过 三段汇总 + 优先处理清单
 
+## 使用 Rules
+
+`rules/` 下的 `.md` 是常驻规则，不通过斜杠命令调用，放到 Agent 会持续读取的位置即可生效。
+
+- **安装**：把需要的规则内容并入目标项目的常驻规则文件（如 `AGENTS.md`），或按所用 AI 工具约定的位置放置
+- **生效方式**：被动、持续。Agent 在相关工作中自行遵循，用户无需触发
+- **组合**：可同时启用多条规则；与语言专属规范冲突时，按「组合使用原则」的顺序取舍
+
 ## 快速使用
 
 供 AI 工具直接爬取的规范原文链接：
@@ -108,7 +128,8 @@ git clone https://gitee.com/Luyi365/<仓库名>.git     # Gitee 镜像
 | Git | 行尾基线配置 | [.gitattributes](https://raw.githubusercontent.com/Luyi365/git-doctor/refs/heads/main/assets/.gitattributes) | [链接](https://gitee.com/Luyi365/git-doctor/raw/main/assets/.gitattributes) |
 | 通用 | EditorConfig 诊断规则 | [SKILL.md](https://raw.githubusercontent.com/Luyi365/editorconfig-doctor/refs/heads/main/SKILL.md) | [链接](https://gitee.com/Luyi365/editorconfig-doctor/raw/main/SKILL.md) |
 | 通用 | EditorConfig 基线配置 | [.editorconfig](https://raw.githubusercontent.com/Luyi365/editorconfig-doctor/refs/heads/main/assets/.editorconfig) | [链接](https://gitee.com/Luyi365/editorconfig-doctor/raw/main/assets/.editorconfig) |
+| 通用 | 代码注释规则 | [code-comment.md](https://raw.githubusercontent.com/Luyi365/rules/refs/heads/main/code-comment.md) | [链接](https://gitee.com/Luyi365/rules/raw/main/code-comment.md) |
 
-Skill 的规则正文位于各自的 `SKILL.md`，上表提供了 GitHub 和 Gitee 的 raw 链接，便于 AI 工具直接读取。
+Skill 的规则正文位于各自的 `SKILL.md`，常驻规则正文位于 `rules/` 下对应的 `.md`，上表提供了 GitHub 和 Gitee 的 raw 链接，便于 AI 工具直接读取。
 
-> 注意：规范原文位于各自的独立仓库，请勿使用 `Project-Guidelines/skills/...` 或 `Project-Guidelines/prompts/...` 路径下的 raw 链接（submodule 内容不随父仓库分发，该类链接一律无效）。Gitee 镜像为单向同步，内容可能略滞后于 GitHub。
+> 注意：规范原文位于各自的独立仓库，请勿使用 `Project-Guidelines/skills/...`、`Project-Guidelines/rules/...` 或 `Project-Guidelines/prompts/...` 路径下的 raw 链接（submodule 内容不随父仓库分发，该类链接一律无效）。Gitee 镜像为单向同步，内容可能略滞后于 GitHub。

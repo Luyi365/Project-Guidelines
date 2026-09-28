@@ -10,3 +10,6 @@
 [submodule "skills/git-doctor"]
 	path = skills/git-doctor
 	url = ../git-doctor.git
+[submodule "rules"]
+	path = rules
+	url = ../rules.git
