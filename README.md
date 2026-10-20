@@ -31,6 +31,7 @@
 | Rule | 说明 |
 | :-----: | :------ |
 | [code-comment.md](rules/code-comment.md) | 通用代码注释规则。约束注释的内容取舍、添加与省略边界、表达格式，不规定具体语言的注释语法 |
+| [c-portability.md](rules/c-portability.md) | C 语言跨平台可移植性规则。以单片机为主、兼顾宿主机，约束类型宽度、字节序、对齐、中断共享与资源限制等易错点，要求平台差异经预定义宏集中适配 |
 
 规则是被动生效的：放进项目后 Agent 在相关工作中应持续遵循，无需调用。这与 `prompts/` 不同，后者要用户主动触发。
 
@@ -48,6 +49,7 @@
 - `git-doctor`负责 Git 子模块与仓库行尾，`.gitattributes`决定版本库实际保存的行尾。
 - `editorconfig-doctor`负责编辑器通用行为；项目存在`.gitattributes`或格式化工具配置时与其对齐，不存在时仍可独立建立基线。
 - `rules/code-comment.md`负责注释的内容质量，不改变任何语言专属规范的注释语法与评分标准。
+- `rules/c-portability.md`负责 C 代码的跨平台正确性，不涉及命名、排版等风格要求；风格问题仍以`c-style.md`为准。
 
 发生交叉冲突时，统一按「项目自身强制规范与 CI → 语义性要求 → 专用工具配置 → 通用基线」处理。换言之：`c-style.md`高于`.clang-format`，`.gitattributes`的行尾规则高于`.editorconfig`，项目自己的明确约定高于各 Skill 与规则的默认值。
 
@@ -124,6 +126,7 @@ git clone https://gitee.com/Luyi365/<仓库名>.git     # Gitee 镜像
 | :-----: | :------: | :-----: | :-----: |
 | C | 代码规范 | [C语言代码风格精简版](https://raw.githubusercontent.com/Luyi365/c-code-review/refs/heads/main/references/c-style.md) | [链接](https://gitee.com/Luyi365/c-code-review/raw/main/references/c-style.md) |
 | C | 格式化配置 | [.clang-format](https://raw.githubusercontent.com/Luyi365/c-code-review/refs/heads/main/assets/.clang-format) | [链接](https://gitee.com/Luyi365/c-code-review/raw/main/assets/.clang-format) |
+| C | 跨平台可移植性规则 | [c-portability.md](https://raw.githubusercontent.com/Luyi365/rules/refs/heads/main/c-portability.md) | [链接](https://gitee.com/Luyi365/rules/raw/main/c-portability.md) |
 | Git | 配置诊断规则 | [SKILL.md](https://raw.githubusercontent.com/Luyi365/git-doctor/refs/heads/main/SKILL.md) | [链接](https://gitee.com/Luyi365/git-doctor/raw/main/SKILL.md) |
 | Git | 行尾基线配置 | [.gitattributes](https://raw.githubusercontent.com/Luyi365/git-doctor/refs/heads/main/assets/.gitattributes) | [链接](https://gitee.com/Luyi365/git-doctor/raw/main/assets/.gitattributes) |
 | 通用 | EditorConfig 诊断规则 | [SKILL.md](https://raw.githubusercontent.com/Luyi365/editorconfig-doctor/refs/heads/main/SKILL.md) | [链接](https://gitee.com/Luyi365/editorconfig-doctor/raw/main/SKILL.md) |
